@@ -1,10 +1,12 @@
 import { useState } from "react"
-import './TodoList.css'
+import style from './TodoList.module.css'
 import AddBtn from "../AddBtn/AddBtn.jsx"
 
 function TodoList(){
     let [todos, setTodos] = useState([])
     let [text, setText] = useState('')
+    let [editText, setEditText] = useState('')
+    let [dblClick, setDblClick] = useState(false)
 
   let addTodo = () => {
     if(text.trim()){
@@ -40,8 +42,12 @@ function TodoList(){
     }))
   }
 
+  let edit = () => {
+    setDblClick(true)
+  }
+
   return(
-      <div>
+      <div className={style.todos}>
         <AddBtn text={text} change={setText} addTodo={addTodo}/>
       {
       todos.map((todo) => {
